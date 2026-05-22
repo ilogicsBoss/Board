@@ -98,6 +98,44 @@ uint16_t IanalogRead(uint8_t ch);
 - Timer1, Timer3, Timer4, Timer5를 직접 설정하므로 PWM, N회 펄스, 고속카운터와 자원 충돌 가능성이 있다.
 - 상세 문서: `docs\IDAC.md`
 
+## IanalogWrite 상태
+
+추가 명령어:
+
+```cpp
+void IanalogWriteInit(uint8_t ch, uint32_t maxValue = 65535UL, uint32_t minValue = 0, bool mode = false);
+void IanalogWrite(uint8_t ch, uint32_t value = 0);
+```
+
+구현 파일:
+
+- `CustomBoard\Hardware\ILOGICS\avr\cores\MCUdude_corefiles\ilogics\IDAC.cpp`
+
+동작:
+
+- MPAINO ATmega2560 계열 아날로그 출력 모듈에서만 실제 출력한다.
+- MPINO 또는 미지원 보드에서 호출하면 아무 동작도 하지 않는다.
+- 지원 채널은 `0` ~ `11`이다. 범위를 벗어나면 출력하지 않는다.
+- 내부 `IDAC` 객체는 4개 모듈을 미리 생성하지 않고, 해당 모듈을 처음 사용할 때 `malloc`으로 확보한다.
+- `IanalogWriteInit()`을 호출하지 않아도 `IanalogWrite()`가 기본 스케일 `0` ~ `65535`, `mode = false` 기준으로 출력한다.
+- `IanalogWrite(ch)`처럼 출력값을 생략하면 해당 채널에 `0`을 출력한다.
+
+채널 매핑:
+
+| `ch` 범위 | 사용자 기준 모듈 | 내부 IDAC 모듈 | IDAC 채널 |
+| --- | --- | --- | --- |
+| `0` ~ `2` | `idac(0)` | `IDAC(1)` | `0` ~ `2` |
+| `3` ~ `5` | `idac(1)` | `IDAC(2)` | `0` ~ `2` |
+| `6` ~ `8` | `idac(2)` | `IDAC(3)` | `0` ~ `2` |
+| `9` ~ `11` | `idac(3)` | `IDAC(4)` | `0` ~ `2` |
+
+검증:
+
+- `IanalogWriteInit()`, `IanalogWrite()` 호출을 포함한 smoke sketch로 전체 17개 FQBN 컴파일 OK.
+- smoke sketch 기준 정적 SRAM: MPINO/ATmega128 계열 `29` bytes, MPAINO 8~32 계열 `242` bytes, MPAINO 48/64 계열 `250` bytes.
+- Arduino size 출력에는 런타임 `IDAC` 객체 heap 사용량이 포함되지 않는다.
+- 실물 전압/전류 출력 검증은 테스트 제품 준비 후 진행한다.
+
 ## IanalogRead(uint8_t ch) 상태
 
 추가 명령어:

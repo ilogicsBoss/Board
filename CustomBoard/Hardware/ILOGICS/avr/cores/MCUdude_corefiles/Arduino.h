@@ -334,6 +334,8 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 int32_t IanalogFilter(uint8_t id, int32_t raw_value, uint8_t samples);
 int32_t IanalogRead(uint8_t ch, uint8_t samples);
 uint16_t IanalogRead(uint8_t ch);
+void IanalogWriteInit(uint8_t ch, uint32_t maxValue = 65535UL, uint32_t minValue = 0, bool mode = false);
+void IanalogWrite(uint8_t ch, uint32_t value = 0);
 
 void Ialt(bool input, bool &state_var);
 bool Itmr(uint8_t timer_id, bool state, unsigned long delayTime, bool reset = false);

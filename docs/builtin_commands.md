@@ -18,7 +18,7 @@
 | 카운터 | `Ictu`, `Ictd`, `Ictud`, `IgetCount`, `IsetCount`, `IctudDownState` | PLC 스타일 카운터 |
 | 에지 | `Iup`, `Idown` | 상승/하강 에지 1스캔 펄스 |
 | 토글 | `Ialt` | 원버튼 토글 |
-| 아날로그 | `Iscale`, `IanalogFilter`, `IanalogRead`, `IADC`, `IDAC` | 스케일링, 이동 평균, MPAINO 간편 아날로그 읽기, 산업용 아날로그 입출력 |
+| 아날로그 | `Iscale`, `IanalogFilter`, `IanalogRead`, `IanalogWrite`, `IADC`, `IDAC` | 스케일링, 이동 평균, MPAINO 간편 아날로그 읽기/쓰기, 산업용 아날로그 입출력 |
 | 통신 | `ImodbusRTU*`, `ICnet*`, `IMc*` | Modbus RTU, LS Cnet, Mitsubishi MC Protocol |
 | 온도 | `INTC`, `INTC1` | NTC 온도 변환 |
 | 와치독 | `WDT_ENABLE`, `WDT_DISABLE`, `WDT` | Watchdog Timer 제어 |
@@ -215,6 +215,52 @@ void loop() {
   dac1.DACOUT(7, 10);
 }
 ```
+
+## IanalogWrite MPAINO 간편 아날로그 출력 명령어
+
+상세 사용법은 [`docs/IanalogWrite.md`](IanalogWrite.md)에 정리되어 있다.
+
+`IanalogWrite()`는 MPAINO 아날로그 출력 모듈을 class 객체 없이 제어하기 위한 전역 명령어이다.
+기존 `IDAC` class는 유지하고, 내부에서 필요한 MPAINO 출력 모듈만 `IDAC`로 생성해서 출력한다.
+
+주요 명령어:
+
+```cpp
+void IanalogWriteInit(uint8_t ch, uint32_t maxValue = 65535UL, uint32_t minValue = 0, bool mode = false);
+void IanalogWrite(uint8_t ch, uint32_t value = 0);
+```
+
+채널 매핑:
+
+| `ch` 범위 | 사용자 기준 모듈 | 내부 IDAC 모듈 | IDAC 채널 |
+| --- | --- | --- | --- |
+| `0` ~ `2` | `idac(0)` | `IDAC(1)` | `0` ~ `2` |
+| `3` ~ `5` | `idac(1)` | `IDAC(2)` | `0` ~ `2` |
+| `6` ~ `8` | `idac(2)` | `IDAC(3)` | `0` ~ `2` |
+| `9` ~ `11` | `idac(3)` | `IDAC(4)` | `0` ~ `2` |
+
+예제:
+
+```cpp
+void setup() {
+  IanalogWriteInit(0, 50, 0, false);
+  IanalogWriteInit(1, 50, 0, false);
+  IanalogWriteInit(2, 50, 0, true);
+}
+
+void loop() {
+  IanalogWrite(0, 5);
+  IanalogWrite(1, 10);
+  IanalogWrite(2, 15);
+}
+```
+
+주의:
+
+- MPAINO 아날로그 출력 모듈용 간편 명령어이다.
+- MPINO 제품에서는 실제 출력 동작을 하지 않는다.
+- `IanalogWrite(ch)`처럼 값 인수를 생략하면 해당 채널에 `0`을 출력한다.
+- 내부 `IDAC` 객체는 해당 모듈을 처음 사용할 때 생성한다.
 
 ## PWM / 펄스 출력 명령어
 
@@ -467,6 +513,7 @@ void loop() {
 - `IADC`는 MPINO와 MPAINO의 입력 구조가 다르다. MPINO는 내부 AVR ADC, MPAINO 아날로그 입력은 ADS1118 SPI ADC를 사용한다.
 - `IADC` 사용 시 입력 범위는 보드 점퍼, 딥스위치, 주문 옵션과 일치해야 한다. 0~5V, 0~10V, 0~20mA, 4~20mA 설정은 제품 자료를 기준으로 확인한다.
 - `IanalogRead(uint8_t ch)`는 MPAINO 전용 간편 읽기 명령어이다. MPINO 제품에서는 `analogRead()`, `IanalogRead(ch, samples)`, 또는 `IADC iadc(0)` 방식을 사용한다.
+- `IanalogWrite()`는 MPAINO 전용 간편 출력 명령어이다. MPINO 제품에서는 기존 `IDAC` class 또는 보드별 기존 방식을 사용한다.
 - MPAINO에서 `IanalogRead(ch, samples)`를 사용하면 ADS1118 원시값을 읽은 뒤 `samples` 개수만큼 이동 평균을 적용한다. `samples`는 최대 `20`까지 적용된다.
 - 상태 또는 버퍼를 확보할 SRAM이 부족하면 필터 처리 없이 현재 raw 값을 반환하거나 `0`을 반환한다.
 - `Ibounce`, 타이머, 카운터, `IanalogRead`의 동적 상태는 한 번 생성되면 프로그램 실행 중 유지된다.

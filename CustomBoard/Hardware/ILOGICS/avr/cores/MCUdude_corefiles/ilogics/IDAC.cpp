@@ -8,6 +8,18 @@
 
 #include "IDAC.h"
 
+inline void* operator new(size_t, void* ptr) {
+    return ptr;
+}
+
+#if defined(__AVR_ATmega2560__) && \
+    (defined(MP8A8R) || defined(MP16A16R) || defined(MP32A16R) || \
+     defined(MP16A32R) || defined(MP24A24R) || defined(MP32A32R) || \
+     defined(M48A48R) || defined(M64A64R) || defined(M48A48R_OLD) || \
+     defined(M64A64R_OLD))
+#define ILOGICS_ENABLE_MPAINO_IANALOGWRITE 1
+#endif
+
 #ifdef __AVR_ATmega2560__
 
 #define ILOGICS_SET_BIT(reg, bit) ((reg) |= (1 << (bit)))
@@ -209,3 +221,57 @@ void IDAC::DACOUT(uint8_t channel2, uint32_t inputValue) {
 }
 
 #endif
+
+#if defined(ILOGICS_ENABLE_MPAINO_IANALOGWRITE)
+static IDAC* ianalogWriteModules[4] = {nullptr, nullptr, nullptr, nullptr};
+
+static IDAC* getIanalogWriteModule(uint8_t moduleIndex) {
+    if (moduleIndex >= 4) {
+        return nullptr;
+    }
+
+    if (ianalogWriteModules[moduleIndex] == nullptr) {
+        void* memory = malloc(sizeof(IDAC));
+        if (memory == nullptr) {
+            return nullptr;
+        }
+        ianalogWriteModules[moduleIndex] = new (memory) IDAC(moduleIndex + 1);
+    }
+
+    return ianalogWriteModules[moduleIndex];
+}
+#endif
+
+void IanalogWriteInit(uint8_t ch, uint32_t maxValue, uint32_t minValue, bool mode) {
+#if defined(ILOGICS_ENABLE_MPAINO_IANALOGWRITE)
+    const uint8_t moduleIndex = ch / 3;
+    const uint8_t dacChannel = ch % 3;
+    IDAC* dac = getIanalogWriteModule(moduleIndex);
+    if (dac == nullptr) {
+        return;
+    }
+
+    dac->INIT(dacChannel, maxValue, minValue, mode);
+#else
+    (void)ch;
+    (void)maxValue;
+    (void)minValue;
+    (void)mode;
+#endif
+}
+
+void IanalogWrite(uint8_t ch, uint32_t value) {
+#if defined(ILOGICS_ENABLE_MPAINO_IANALOGWRITE)
+    const uint8_t moduleIndex = ch / 3;
+    const uint8_t dacChannel = ch % 3;
+    IDAC* dac = getIanalogWriteModule(moduleIndex);
+    if (dac == nullptr) {
+        return;
+    }
+
+    dac->DACOUT(dacChannel, value);
+#else
+    (void)ch;
+    (void)value;
+#endif
+}
