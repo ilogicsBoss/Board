@@ -1,0 +1,33 @@
+################################
+## These programmers will only
+## appear if you're using the
+## ArduinoEclipse/Sloeber IDE.
+## Download this great software
+## at: http://eclipse.baeyens.it
+################################
+
+
+avrisp.name=AVR ISP
+avrisp.communication=serial
+avrisp.protocol=stk500v1
+avrisp.program.protocol=stk500v1
+avrisp.program.tool=avrdude
+avrisp.program.extra_params=-P{serial.port}
+usbtinyisp.name=USBtinyISP
+usbtinyisp.protocol=usbtiny
+usbtinyisp.program.tool=avrdude
+usbtinyisp.program.extra_params=
+
+
+
+# STK500 firmware version v1 and v2 use different serial protocols.
+# Using the 'stk500' protocol tells avrdude to try and autodetect the
+# firmware version. If this leads to problems, we might need to add
+# stk500v1 and stk500v2 entries to allow explicitly selecting the
+# firmware version.
+#stk500.name=Atmel STK500 development board
+#stk500.communication=serial
+#stk500.protocol=stk500
+#stk500.program.protocol=stk500
+#stk500.program.tool=avrdude
+#stk500.program.extra_params=-P{serial.port}

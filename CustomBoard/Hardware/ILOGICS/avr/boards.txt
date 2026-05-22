@@ -1,0 +1,790 @@
+################################################################################
+# ILOGICS MPINO / MPAINO 시리즈 보드 정의 파일
+#
+# 본 파일은 Arduino IDE에서 ㈜아이로직스(ILOGICS)의 산업용 Arduino 호환 PLC
+# 보드를 사용할 수 있도록 보드 정보를 정의합니다.
+#
+#   설치 경로 예: <Arduino 설치 폴더>/hardware/ilogics/avr/boards.txt
+#
+# 지원 보드군:
+#   - MPINO  시리즈 (ATmega128 기반): MPINO-8A4R(T)-S 등
+#   - MPINO  시리즈 (ATmega2560 기반): MPINO-8A8R 등
+#   - MPAINO 시리즈 (ATmega2560 기반): MPAINO-8A8R(T), MPAINO-64A64R(T) 등
+#
+# 모든 보드는 16MHz 동작, UART0 (115200bps)을 통한 시리얼 업로드를 사용합니다.
+# 문의: ㈜아이로직스 (ILOGICS)
+################################################################################
+
+################################################################################
+# ATmega128 기반 MPINO 보드
+################################################################################
+
+#########################
+####  MPINO-8A4R(T)-S
+#########################
+# MCU: ATmega128 / Flash 128KB(사용 가능 130,048B) / SRAM 4KB / 16MHz
+# 업로드: UART0 (115200bps), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+8A4R_S.name=MPINO-8A4R(T)-S
+
+# --- 업로드 설정 ---
+8A4R_S.upload.tool=avrdude
+8A4R_S.upload.protocol=arduino
+8A4R_S.upload.maximum_size=130048
+8A4R_S.upload.maximum_data_size=4096
+8A4R_S.upload.speed=115200
+8A4R_S.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+8A4R_S.bootloader.tool=avrdude
+8A4R_S.bootloader.unlock_bits=0x3F
+8A4R_S.bootloader.lock_bits=0x3C
+8A4R_S.bootloader.low_fuses=0xBF
+8A4R_S.bootloader.high_fuses=0xCC
+8A4R_S.bootloader.extended_fuses=0xFF
+
+# --- 빌드 설정 ---
+8A4R_S.build.core=MCUdude_corefiles
+8A4R_S.build.variant=8A4R-S
+8A4R_S.build.board=AVR_ATmega128
+8A4R_S.build.mcu=atmega128
+8A4R_S.build.f_cpu=16000000L
+8A4R_S.build.bootloader_led=E2
+8A4R_S.build.extra_flags=-DM8A4RS
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+8A4R_S.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+8A4R_S.bootloader.uart0=Serial
+8A4R_S.bootloader.upload.protocol=arduino
+8A4R_S.bootloader.upload.port=UART0
+8A4R_S.bootloader.upload.speed=115200
+8A4R_S.bootloader.build.export_merged_output=true
+8A4R_S.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPINO-8A4R-SU
+#########################
+# MCU: ATmega128 / Flash 128KB(사용 가능 130,048B) / SRAM 4KB / 16MHz
+# 업로드: UART0 (115200bps), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+8A4R_SU.name=MPINO-8A4R-SU
+
+# --- 업로드 설정 ---
+8A4R_SU.upload.tool=avrdude
+8A4R_SU.upload.protocol=arduino
+8A4R_SU.upload.maximum_size=130048
+8A4R_SU.upload.maximum_data_size=4096
+8A4R_SU.upload.speed=115200
+8A4R_SU.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+8A4R_SU.bootloader.tool=avrdude
+8A4R_SU.bootloader.unlock_bits=0x3F
+8A4R_SU.bootloader.lock_bits=0x3C
+8A4R_SU.bootloader.low_fuses=0xBF
+8A4R_SU.bootloader.high_fuses=0xCC
+8A4R_SU.bootloader.extended_fuses=0xFF
+
+# --- 빌드 설정 ---
+8A4R_SU.build.core=MCUdude_corefiles
+8A4R_SU.build.variant=8A4R-SU
+8A4R_SU.build.board=AVR_ATmega128
+8A4R_SU.build.mcu=atmega128
+8A4R_SU.build.f_cpu=16000000L
+8A4R_SU.build.bootloader_led=E2
+8A4R_SU.build.extra_flags=-DM8A4RSU
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+8A4R_SU.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+8A4R_SU.bootloader.uart0=Serial
+8A4R_SU.bootloader.upload.protocol=arduino
+8A4R_SU.bootloader.upload.port=UART0
+8A4R_SU.bootloader.upload.speed=115200
+8A4R_SU.bootloader.build.export_merged_output=true
+8A4R_SU.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPINO-8A8R(T)-S
+#########################
+# MCU: ATmega128 / Flash 128KB(사용 가능 130,048B) / SRAM 4KB / 16MHz
+# 업로드: UART0 (115200bps), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+8A8R_S.name=MPINO-8A8R(T)-S
+
+# --- 업로드 설정 ---
+8A8R_S.upload.tool=avrdude
+8A8R_S.upload.protocol=arduino
+8A8R_S.upload.maximum_size=130048
+8A8R_S.upload.maximum_data_size=4096
+8A8R_S.upload.speed=115200
+8A8R_S.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+8A8R_S.bootloader.tool=avrdude
+8A8R_S.bootloader.unlock_bits=0x3F
+8A8R_S.bootloader.lock_bits=0x3C
+8A8R_S.bootloader.low_fuses=0xBF
+8A8R_S.bootloader.high_fuses=0xCC
+8A8R_S.bootloader.extended_fuses=0xFF
+
+# --- 빌드 설정 ---
+8A8R_S.build.core=MCUdude_corefiles
+8A8R_S.build.variant=8A8R-S
+8A8R_S.build.board=AVR_ATmega128
+8A8R_S.build.mcu=atmega128
+8A8R_S.build.f_cpu=16000000L
+8A8R_S.build.bootloader_led=E2
+8A8R_S.build.extra_flags=-DM8A8RS
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+8A8R_S.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+8A8R_S.bootloader.uart0=Serial
+8A8R_S.bootloader.upload.protocol=arduino
+8A8R_S.bootloader.upload.port=UART0
+8A8R_S.bootloader.upload.speed=115200
+8A8R_S.bootloader.build.export_merged_output=true
+8A8R_S.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPINO-16A16R(T)
+#########################
+# MCU: ATmega128 / Flash 128KB(사용 가능 130,048B) / SRAM 4KB / 16MHz
+# 업로드: UART0 (115200bps), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+16A16R.name=MPINO-16A16R(T)
+
+# --- 업로드 설정 ---
+16A16R.upload.tool=avrdude
+16A16R.upload.protocol=arduino
+16A16R.upload.maximum_size=130048
+16A16R.upload.maximum_data_size=4096
+16A16R.upload.speed=115200
+16A16R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+16A16R.bootloader.tool=avrdude
+16A16R.bootloader.unlock_bits=0x3F
+16A16R.bootloader.lock_bits=0x3C
+16A16R.bootloader.low_fuses=0xBF
+16A16R.bootloader.high_fuses=0xCC
+16A16R.bootloader.extended_fuses=0xFF
+
+# --- 빌드 설정 ---
+16A16R.build.core=MCUdude_corefiles
+16A16R.build.variant=16A16R
+16A16R.build.board=AVR_ATmega128
+16A16R.build.mcu=atmega128
+16A16R.build.f_cpu=16000000L
+16A16R.build.bootloader_led=E2
+16A16R.build.extra_flags=-DM16A16R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+16A16R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+16A16R.bootloader.uart0=Serial
+16A16R.bootloader.upload.protocol=arduino
+16A16R.bootloader.upload.port=UART0
+16A16R.bootloader.upload.speed=115200
+16A16R.bootloader.build.export_merged_output=true
+16A16R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+################################################################################
+# ATmega2560 기반 MPINO / MPAINO 보드
+################################################################################
+
+#########################
+####  MPINO-8A8R
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPINO8A8R.name=MPINO-8A8R
+
+# --- 업로드 설정 ---
+MPINO8A8R.upload.tool=avrdude
+MPINO8A8R.upload.protocol=wiring
+MPINO8A8R.upload.maximum_size=261120
+MPINO8A8R.upload.maximum_data_size=8192
+MPINO8A8R.upload.speed=115200
+MPINO8A8R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPINO8A8R.bootloader.tool=avrdude
+MPINO8A8R.bootloader.unlock_bits=0x3F
+MPINO8A8R.bootloader.lock_bits=0x3C
+MPINO8A8R.bootloader.low_fuses=0xFF
+MPINO8A8R.bootloader.high_fuses=0xD8
+MPINO8A8R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPINO8A8R.build.core=MCUdude_corefiles
+MPINO8A8R.build.variant=MPINO_2560
+MPINO8A8R.build.board=AVR_ATmega2560
+MPINO8A8R.build.mcu=atmega2560
+MPINO8A8R.build.f_cpu=16000000L
+MPINO8A8R.build.bootloader_led=B7
+MPINO8A8R.build.extra_flags=-DM8A8R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPINO8A8R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPINO8A8R.bootloader.uart0=Serial
+MPINO8A8R.bootloader.upload.protocol=wiring
+MPINO8A8R.bootloader.upload.port=UART0
+MPINO8A8R.bootloader.upload.speed=115200
+MPINO8A8R.bootloader.build.export_merged_output=true
+MPINO8A8R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPINO-16A8R
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPINO16A8R.name=MPINO-16A8R
+
+# --- 업로드 설정 ---
+MPINO16A8R.upload.tool=avrdude
+MPINO16A8R.upload.protocol=wiring
+MPINO16A8R.upload.maximum_size=261120
+MPINO16A8R.upload.maximum_data_size=8192
+MPINO16A8R.upload.speed=115200
+MPINO16A8R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPINO16A8R.bootloader.tool=avrdude
+MPINO16A8R.bootloader.unlock_bits=0x3F
+MPINO16A8R.bootloader.lock_bits=0x3C
+MPINO16A8R.bootloader.low_fuses=0xFF
+MPINO16A8R.bootloader.high_fuses=0xD8
+MPINO16A8R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPINO16A8R.build.core=MCUdude_corefiles
+MPINO16A8R.build.variant=MPINO_2560
+MPINO16A8R.build.board=AVR_ATmega2560
+MPINO16A8R.build.mcu=atmega2560
+MPINO16A8R.build.f_cpu=16000000L
+MPINO16A8R.build.bootloader_led=B7
+MPINO16A8R.build.extra_flags=-DM16A8R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPINO16A8R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPINO16A8R.bootloader.uart0=Serial
+MPINO16A8R.bootloader.upload.protocol=wiring
+MPINO16A8R.bootloader.upload.port=UART0
+MPINO16A8R.bootloader.upload.speed=115200
+MPINO16A8R.bootloader.build.export_merged_output=true
+MPINO16A8R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPINO-16A8R8T
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPINO16A8R8T.name=MPINO-16A8R8T
+
+# --- 업로드 설정 ---
+MPINO16A8R8T.upload.tool=avrdude
+MPINO16A8R8T.upload.protocol=wiring
+MPINO16A8R8T.upload.maximum_size=261120
+MPINO16A8R8T.upload.maximum_data_size=8192
+MPINO16A8R8T.upload.speed=115200
+MPINO16A8R8T.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPINO16A8R8T.bootloader.tool=avrdude
+MPINO16A8R8T.bootloader.unlock_bits=0x3F
+MPINO16A8R8T.bootloader.lock_bits=0x3C
+MPINO16A8R8T.bootloader.low_fuses=0xFF
+MPINO16A8R8T.bootloader.high_fuses=0xD8
+MPINO16A8R8T.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPINO16A8R8T.build.core=MCUdude_corefiles
+MPINO16A8R8T.build.variant=MPINO_2560
+MPINO16A8R8T.build.board=AVR_ATmega2560
+MPINO16A8R8T.build.mcu=atmega2560
+MPINO16A8R8T.build.f_cpu=16000000L
+MPINO16A8R8T.build.bootloader_led=B7
+MPINO16A8R8T.build.extra_flags=-DM16A8R8T
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPINO16A8R8T.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPINO16A8R8T.bootloader.uart0=Serial
+MPINO16A8R8T.bootloader.upload.protocol=wiring
+MPINO16A8R8T.bootloader.upload.port=UART0
+MPINO16A8R8T.bootloader.upload.speed=115200
+MPINO16A8R8T.bootloader.build.export_merged_output=true
+MPINO16A8R8T.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-8A8R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO8A8R.name=MPAINO-8A8R(T)
+
+# --- 업로드 설정 ---
+MPAINO8A8R.upload.tool=avrdude
+MPAINO8A8R.upload.protocol=wiring
+MPAINO8A8R.upload.maximum_size=261120
+MPAINO8A8R.upload.maximum_data_size=8192
+MPAINO8A8R.upload.speed=115200
+MPAINO8A8R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO8A8R.bootloader.tool=avrdude
+MPAINO8A8R.bootloader.unlock_bits=0x3F
+MPAINO8A8R.bootloader.lock_bits=0x3C
+MPAINO8A8R.bootloader.low_fuses=0xFF
+MPAINO8A8R.bootloader.high_fuses=0xD8
+MPAINO8A8R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO8A8R.build.core=MCUdude_corefiles
+MPAINO8A8R.build.variant=MPINO_2560
+MPAINO8A8R.build.board=AVR_ATmega2560
+MPAINO8A8R.build.mcu=atmega2560
+MPAINO8A8R.build.f_cpu=16000000L
+MPAINO8A8R.build.bootloader_led=B7
+MPAINO8A8R.build.extra_flags=-DMP8A8R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO8A8R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO8A8R.bootloader.uart0=Serial
+MPAINO8A8R.bootloader.upload.protocol=wiring
+MPAINO8A8R.bootloader.upload.port=UART0
+MPAINO8A8R.bootloader.upload.speed=115200
+MPAINO8A8R.bootloader.build.export_merged_output=true
+MPAINO8A8R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-16A16R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO16A16R.name=MPAINO-16A16R(T)
+
+# --- 업로드 설정 ---
+MPAINO16A16R.upload.tool=avrdude
+MPAINO16A16R.upload.protocol=wiring
+MPAINO16A16R.upload.maximum_size=261120
+MPAINO16A16R.upload.maximum_data_size=8192
+MPAINO16A16R.upload.speed=115200
+MPAINO16A16R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO16A16R.bootloader.tool=avrdude
+MPAINO16A16R.bootloader.unlock_bits=0x3F
+MPAINO16A16R.bootloader.lock_bits=0x3C
+MPAINO16A16R.bootloader.low_fuses=0xFF
+MPAINO16A16R.bootloader.high_fuses=0xD8
+MPAINO16A16R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO16A16R.build.core=MCUdude_corefiles
+MPAINO16A16R.build.variant=MPINO_2560
+MPAINO16A16R.build.board=AVR_ATmega2560
+MPAINO16A16R.build.mcu=atmega2560
+MPAINO16A16R.build.f_cpu=16000000L
+MPAINO16A16R.build.bootloader_led=B7
+MPAINO16A16R.build.extra_flags=-DMP16A16R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO16A16R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO16A16R.bootloader.uart0=Serial
+MPAINO16A16R.bootloader.upload.protocol=wiring
+MPAINO16A16R.bootloader.upload.port=UART0
+MPAINO16A16R.bootloader.upload.speed=115200
+MPAINO16A16R.bootloader.build.export_merged_output=true
+MPAINO16A16R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-32A16R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO32A16R.name=MPAINO-32A16R(T)
+
+# --- 업로드 설정 ---
+MPAINO32A16R.upload.tool=avrdude
+MPAINO32A16R.upload.protocol=wiring
+MPAINO32A16R.upload.maximum_size=261120
+MPAINO32A16R.upload.maximum_data_size=8192
+MPAINO32A16R.upload.speed=115200
+MPAINO32A16R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO32A16R.bootloader.tool=avrdude
+MPAINO32A16R.bootloader.unlock_bits=0x3F
+MPAINO32A16R.bootloader.lock_bits=0x3C
+MPAINO32A16R.bootloader.low_fuses=0xFF
+MPAINO32A16R.bootloader.high_fuses=0xD8
+MPAINO32A16R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO32A16R.build.core=MCUdude_corefiles
+MPAINO32A16R.build.variant=MPAINO_2560
+MPAINO32A16R.build.board=AVR_ATmega2560
+MPAINO32A16R.build.mcu=atmega2560
+MPAINO32A16R.build.f_cpu=16000000L
+MPAINO32A16R.build.bootloader_led=B7
+MPAINO32A16R.build.extra_flags=-DMP32A16R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO32A16R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO32A16R.bootloader.uart0=Serial
+MPAINO32A16R.bootloader.upload.protocol=wiring
+MPAINO32A16R.bootloader.upload.port=UART0
+MPAINO32A16R.bootloader.upload.speed=115200
+MPAINO32A16R.bootloader.build.export_merged_output=true
+MPAINO32A16R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-16A32R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO16A32R.name=MPAINO-16A32R(T)
+
+# --- 업로드 설정 ---
+MPAINO16A32R.upload.tool=avrdude
+MPAINO16A32R.upload.protocol=wiring
+MPAINO16A32R.upload.maximum_size=261120
+MPAINO16A32R.upload.maximum_data_size=8192
+MPAINO16A32R.upload.speed=115200
+MPAINO16A32R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO16A32R.bootloader.tool=avrdude
+MPAINO16A32R.bootloader.unlock_bits=0x3F
+MPAINO16A32R.bootloader.lock_bits=0x3C
+MPAINO16A32R.bootloader.low_fuses=0xFF
+MPAINO16A32R.bootloader.high_fuses=0xD8
+MPAINO16A32R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO16A32R.build.core=MCUdude_corefiles
+MPAINO16A32R.build.variant=MPAINO_2560
+MPAINO16A32R.build.board=AVR_ATmega2560
+MPAINO16A32R.build.mcu=atmega2560
+MPAINO16A32R.build.f_cpu=16000000L
+MPAINO16A32R.build.bootloader_led=B7
+MPAINO16A32R.build.extra_flags=-DMP16A32R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO16A32R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO16A32R.bootloader.uart0=Serial
+MPAINO16A32R.bootloader.upload.protocol=wiring
+MPAINO16A32R.bootloader.upload.port=UART0
+MPAINO16A32R.bootloader.upload.speed=115200
+MPAINO16A32R.bootloader.build.export_merged_output=true
+MPAINO16A32R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-24A24R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO24A24R.name=MPAINO-24A24R(T)
+
+# --- 업로드 설정 ---
+MPAINO24A24R.upload.tool=avrdude
+MPAINO24A24R.upload.protocol=wiring
+MPAINO24A24R.upload.maximum_size=261120
+MPAINO24A24R.upload.maximum_data_size=8192
+MPAINO24A24R.upload.speed=115200
+MPAINO24A24R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO24A24R.bootloader.tool=avrdude
+MPAINO24A24R.bootloader.unlock_bits=0x3F
+MPAINO24A24R.bootloader.lock_bits=0x3C
+MPAINO24A24R.bootloader.low_fuses=0xFF
+MPAINO24A24R.bootloader.high_fuses=0xD8
+MPAINO24A24R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO24A24R.build.core=MCUdude_corefiles
+MPAINO24A24R.build.variant=MPAINO_2560
+MPAINO24A24R.build.board=AVR_ATmega2560
+MPAINO24A24R.build.mcu=atmega2560
+MPAINO24A24R.build.f_cpu=16000000L
+MPAINO24A24R.build.bootloader_led=B7
+MPAINO24A24R.build.extra_flags=-DMP24A24R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO24A24R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO24A24R.bootloader.uart0=Serial
+MPAINO24A24R.bootloader.upload.protocol=wiring
+MPAINO24A24R.bootloader.upload.port=UART0
+MPAINO24A24R.bootloader.upload.speed=115200
+MPAINO24A24R.bootloader.build.export_merged_output=true
+MPAINO24A24R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-32A32R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO32A32R.name=MPAINO-32A32R(T)
+
+# --- 업로드 설정 ---
+MPAINO32A32R.upload.tool=avrdude
+MPAINO32A32R.upload.protocol=wiring
+MPAINO32A32R.upload.maximum_size=261120
+MPAINO32A32R.upload.maximum_data_size=8192
+MPAINO32A32R.upload.speed=115200
+MPAINO32A32R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO32A32R.bootloader.tool=avrdude
+MPAINO32A32R.bootloader.unlock_bits=0x3F
+MPAINO32A32R.bootloader.lock_bits=0x3C
+MPAINO32A32R.bootloader.low_fuses=0xFF
+MPAINO32A32R.bootloader.high_fuses=0xD8
+MPAINO32A32R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO32A32R.build.core=MCUdude_corefiles
+MPAINO32A32R.build.variant=MPAINO_2560
+MPAINO32A32R.build.board=AVR_ATmega2560
+MPAINO32A32R.build.mcu=atmega2560
+MPAINO32A32R.build.f_cpu=16000000L
+MPAINO32A32R.build.bootloader_led=B7
+MPAINO32A32R.build.extra_flags=-DMP32A32R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO32A32R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO32A32R.bootloader.uart0=Serial
+MPAINO32A32R.bootloader.upload.protocol=wiring
+MPAINO32A32R.bootloader.upload.port=UART0
+MPAINO32A32R.bootloader.upload.speed=115200
+MPAINO32A32R.bootloader.build.export_merged_output=true
+MPAINO32A32R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-48A48R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO48A48R.name=MPAINO-48A48R(T)
+
+# --- 업로드 설정 ---
+MPAINO48A48R.upload.tool=avrdude
+MPAINO48A48R.upload.protocol=wiring
+MPAINO48A48R.upload.maximum_size=261120
+MPAINO48A48R.upload.maximum_data_size=8192
+MPAINO48A48R.upload.speed=115200
+MPAINO48A48R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO48A48R.bootloader.tool=avrdude
+MPAINO48A48R.bootloader.unlock_bits=0x3F
+MPAINO48A48R.bootloader.lock_bits=0x3C
+MPAINO48A48R.bootloader.low_fuses=0xFF
+MPAINO48A48R.bootloader.high_fuses=0xD8
+MPAINO48A48R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO48A48R.build.core=MCUdude_corefiles
+MPAINO48A48R.build.variant=MPAINO_2560_S
+MPAINO48A48R.build.board=AVR_ATmega2560
+MPAINO48A48R.build.mcu=atmega2560
+MPAINO48A48R.build.f_cpu=16000000L
+MPAINO48A48R.build.bootloader_led=B7
+MPAINO48A48R.build.extra_flags=-DM48A48R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO48A48R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO48A48R.bootloader.uart0=Serial
+MPAINO48A48R.bootloader.upload.protocol=wiring
+MPAINO48A48R.bootloader.upload.port=UART0
+MPAINO48A48R.bootloader.upload.speed=115200
+MPAINO48A48R.bootloader.build.export_merged_output=true
+MPAINO48A48R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-64A64R(T)
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO64A64R.name=MPAINO-64A64R(T)
+
+# --- 업로드 설정 ---
+MPAINO64A64R.upload.tool=avrdude
+MPAINO64A64R.upload.protocol=wiring
+MPAINO64A64R.upload.maximum_size=261120
+MPAINO64A64R.upload.maximum_data_size=8192
+MPAINO64A64R.upload.speed=115200
+MPAINO64A64R.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO64A64R.bootloader.tool=avrdude
+MPAINO64A64R.bootloader.unlock_bits=0x3F
+MPAINO64A64R.bootloader.lock_bits=0x3C
+MPAINO64A64R.bootloader.low_fuses=0xFF
+MPAINO64A64R.bootloader.high_fuses=0xD8
+MPAINO64A64R.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO64A64R.build.core=MCUdude_corefiles
+MPAINO64A64R.build.variant=MPAINO_2560_S
+MPAINO64A64R.build.board=AVR_ATmega2560
+MPAINO64A64R.build.mcu=atmega2560
+MPAINO64A64R.build.f_cpu=16000000L
+MPAINO64A64R.build.bootloader_led=B7
+MPAINO64A64R.build.extra_flags=-DM64A64R
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO64A64R.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO64A64R.bootloader.uart0=Serial
+MPAINO64A64R.bootloader.upload.protocol=wiring
+MPAINO64A64R.bootloader.upload.port=UART0
+MPAINO64A64R.bootloader.upload.speed=115200
+MPAINO64A64R.bootloader.build.export_merged_output=true
+MPAINO64A64R.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-48A48R(T)-OLD
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO48A48ROLD.name=MPAINO-48A48R(T)-OLD
+
+# --- 업로드 설정 ---
+MPAINO48A48ROLD.upload.tool=avrdude
+MPAINO48A48ROLD.upload.protocol=wiring
+MPAINO48A48ROLD.upload.maximum_size=261120
+MPAINO48A48ROLD.upload.maximum_data_size=8192
+MPAINO48A48ROLD.upload.speed=115200
+MPAINO48A48ROLD.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO48A48ROLD.bootloader.tool=avrdude
+MPAINO48A48ROLD.bootloader.unlock_bits=0x3F
+MPAINO48A48ROLD.bootloader.lock_bits=0x3C
+MPAINO48A48ROLD.bootloader.low_fuses=0xFF
+MPAINO48A48ROLD.bootloader.high_fuses=0xD8
+MPAINO48A48ROLD.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO48A48ROLD.build.core=MCUdude_corefiles
+MPAINO48A48ROLD.build.variant=MPAINO_2560_S
+MPAINO48A48ROLD.build.board=AVR_ATmega2560
+MPAINO48A48ROLD.build.mcu=atmega2560
+MPAINO48A48ROLD.build.f_cpu=16000000L
+MPAINO48A48ROLD.build.bootloader_led=B7
+MPAINO48A48ROLD.build.extra_flags=-DM48A48R_OLD
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO48A48ROLD.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO48A48ROLD.bootloader.uart0=Serial
+MPAINO48A48ROLD.bootloader.upload.protocol=wiring
+MPAINO48A48ROLD.bootloader.upload.port=UART0
+MPAINO48A48ROLD.bootloader.upload.speed=115200
+MPAINO48A48ROLD.bootloader.build.export_merged_output=true
+MPAINO48A48ROLD.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+
+#########################
+####  MPAINO-64A64R(T)-OLD
+#########################
+# MCU: ATmega2560 / Flash 256KB(사용 가능 261,120B) / SRAM 8KB / 16MHz
+# 업로드: UART0 (115200bps, wiring 프로토콜), Optiboot BIGBOOT 부트로더
+
+# --- 기본 정보 ---
+MPAINO64A64ROLD.name=MPAINO-64A64R(T)-OLD
+
+# --- 업로드 설정 ---
+MPAINO64A64ROLD.upload.tool=avrdude
+MPAINO64A64ROLD.upload.protocol=wiring
+MPAINO64A64ROLD.upload.maximum_size=261120
+MPAINO64A64ROLD.upload.maximum_data_size=8192
+MPAINO64A64ROLD.upload.speed=115200
+MPAINO64A64ROLD.upload.port=UART0
+
+# --- 부트로더 굽기용 퓨즈/락 비트 ---
+MPAINO64A64ROLD.bootloader.tool=avrdude
+MPAINO64A64ROLD.bootloader.unlock_bits=0x3F
+MPAINO64A64ROLD.bootloader.lock_bits=0x3C
+MPAINO64A64ROLD.bootloader.low_fuses=0xFF
+MPAINO64A64ROLD.bootloader.high_fuses=0xD8
+MPAINO64A64ROLD.bootloader.extended_fuses=0xFD
+
+# --- 빌드 설정 ---
+MPAINO64A64ROLD.build.core=MCUdude_corefiles
+MPAINO64A64ROLD.build.variant=MPAINO_2560_S
+MPAINO64A64ROLD.build.board=AVR_ATmega2560
+MPAINO64A64ROLD.build.mcu=atmega2560
+MPAINO64A64ROLD.build.f_cpu=16000000L
+MPAINO64A64ROLD.build.bootloader_led=B7
+MPAINO64A64ROLD.build.extra_flags=-DM64A64R_OLD
+
+# 아카이브 도구 (platform.txt의 {ltoarcmd} 변수에 사용됨)
+MPAINO64A64ROLD.ltoarcmd=avr-ar
+
+# --- 부트로더 hex 경로 (Tools > Burn Bootloader 메뉴용) ---
+MPAINO64A64ROLD.bootloader.uart0=Serial
+MPAINO64A64ROLD.bootloader.upload.protocol=wiring
+MPAINO64A64ROLD.bootloader.upload.port=UART0
+MPAINO64A64ROLD.bootloader.upload.speed=115200
+MPAINO64A64ROLD.bootloader.build.export_merged_output=true
+MPAINO64A64ROLD.bootloader.file=optiboot_flash/bootloaders/{build.mcu}/{build.f_cpu}/optiboot_flash_{build.mcu}_{upload.port}_{upload.speed}_{build.f_cpu}_{build.bootloader_led}_BIGBOOT.hex
+

@@ -1,0 +1,1 @@
+CustomBoard 폴더는 아두이노 IDE에서 Hardware 폴더를 내문서\Arduino\ 폴더에 넣어놓으면 이 폴더의 보드정보를 사용할 수 있다.

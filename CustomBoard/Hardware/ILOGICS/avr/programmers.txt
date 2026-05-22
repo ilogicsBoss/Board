@@ -1,0 +1,13 @@
+stk500.name=STK500 as ISP
+stk500.communication=serial
+stk500.protocol=stk500
+stk500.program.protocol=stk500
+stk500.program.tool=avrdude
+stk500.program.extra_params= -P{serial.port}
+
+avrisp.name=AVR ISP
+avrisp.communication=serial
+avrisp.protocol=stk500v1
+avrisp.program.protocol=stk500v1
+avrisp.program.tool=avrdude
+avrisp.program.extra_params=-P{serial.port}
