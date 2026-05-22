@@ -1,0 +1,42 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+@eaDir/
+#recycle/
+
+# Editors and local workspaces
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arduino and local build output
+build/
+build-*/
+_build/
+.cache/
+arduino-cache/
+compile_commands.json
+*.elf
+*.eep
+*.map
+*.lst
+*.bin
+*.with_bootloader.hex
+*.ino.hex
+*.ino.elf
+*.ino.eep
+
+# Temporary and merge files
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Python helper caches
+__pycache__/
+.pytest_cache/
