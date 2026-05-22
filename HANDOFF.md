@@ -20,6 +20,14 @@
 - 전체 결과: `8A4R_S`, `8A4R_SU`, `8A8R_S`, `16A16R`, `MPINO8A8R`, `MPINO16A8R`, `MPINO16A8R8T`, `MPAINO8A8R`, `MPAINO16A16R`, `MPAINO32A16R`, `MPAINO16A32R`, `MPAINO24A24R`, `MPAINO32A32R`, `MPAINO48A48R`, `MPAINO64A64R`, `MPAINO48A48ROLD`, `MPAINO64A64ROLD` 모두 OK.
 - smoke sketch 기준 정적 SRAM: MPINO/ATmega128 계열 `33` bytes, MPAINO 8~32 계열 `226` bytes, MPAINO 48/64 계열 `234` bytes. 런타임 `malloc` 사용량은 이 수치에 포함되지 않는다.
 
+## 문서/블로그 누락 정리
+
+- 2026-05-22에 `Manual\BuiltinCommands` 폴더를 추가하고 내장 명령어 매뉴얼 초안을 작성했다.
+- 작성한 매뉴얼: `README.md`, `IADC.md`, `IDAC.md`, `IanalogRead.md`, `Ibounce.md`, `ITimer.md`, `ICounter.md`, `Basic_Control.md`, `IPWM.md`, `INTC_WDT.md`, `Communication.md`.
+- 기존에 있던 `blog\IanalogRead.md`, `blog\Memory_Optimized_State.md`, `blog\blog_wdt_ntemp.md`는 유지했다.
+- 새로 작성한 블로그 초안: `blog\IADC.md`, `blog\IDAC.md`, `blog\Ibounce.md`, `blog\ITimer.md`, `blog\ICounter.md`, `blog\IPWM.md`, `blog\Basic_Control_Commands.md`, `blog\Communication_Commands.md`.
+- 문서만 추가했으므로 펌웨어 컴파일은 다시 수행하지 않았다. 실물 제품 검증은 테스트 제품 준비 후 진행한다.
+
 ## 반드시 먼저 확인할 기준
 
 다음 세션 시작 시 아래 순서로 확인한다.
